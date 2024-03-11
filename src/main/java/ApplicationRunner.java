@@ -1,16 +1,10 @@
 import com.dmdev.spring.database.ConnectionPool;
-import com.dmdev.spring.database.repository.CompanyRepository;
-import com.dmdev.spring.database.repository.UserRepository;
-import com.dmdev.spring.ioc.Container;
-import com.dmdev.spring.service.UserService;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class ApplicationRunner {
     public static void main(String[] args) {
-        var container = new Container();
-
-        var connectionPool = container.get(ConnectionPool.class);
-        var userRepository = container.get(UserRepository.class);
-        var companyRepository = container.get(CompanyRepository.class);
-        var service = container.get(UserService.class);
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application.xml");
+        var pool1 = context.getBean("pool1", ConnectionPool.class);
+        System.out.println(pool1);
     }
 }
